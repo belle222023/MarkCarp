@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Upcoming Work — Mark Carp</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#B8001F;--red-d:#8A0015;--red-m:#C8002A;
+  --white:#FFFFFF;--off:#FAF8F5;--cream:#F4EFE6;
+  --dark:#130806;--dark2:#1E0C09;--ink:#2A1410;
+  --gray:#6B6560;--lgray:#DDD7CF;
+  --serif:"Playfair Display",Georgia,serif;
+  --body:"EB Garamond",Georgia,serif;
+  --sans:"Montserrat",sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--off);color:var(--ink);overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;width:100%;z-index:1000;background:rgba(90, 15, 2, 0.97);
+  backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,0,31,.35);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5rem;height:68px;}
+.nav-logo{font-family:var(--serif);color:var(--white);font-size:1.8rem;font-weight:700;
+  text-decoration:none;letter-spacing:.03em;white-space:nowrap;}
+.nav-logo em{color:var(--red-m);font-style:italic;font-weight:400;}
+.nav-links{display:flex;gap:2.6rem;list-style:none;}
+.nav-links a{font-family:var(--sans);color:rgba(255,255,255,.6);text-decoration:none;
+  font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  transition:color .25s;position:relative;padding-bottom:3px;}
+.nav-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--red-m);transition:width .3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.ham{display:none;flex-direction:column;gap:5px;background:none;
+  border:1px solid rgba(255,255,255,.2);padding:10px;cursor:pointer;
+  border-radius:2px;transition:.3s;}
+.ham span{display:block;width:20px;height:1.5px;background:var(--white);transition:.35s;}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--dark2);z-index:998;flex-direction:column;
+  transform:translateX(100%);transition:.4s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.mob.open{transform:translateX(0);}
+.mob a{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--sans);color:rgba(255,255,255,.75);text-decoration:none;
+  font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:1.4rem 2rem;border-bottom:1px solid rgba(255,255,255,.05);transition:.25s;}
+.mob a:hover{background:rgba(184,0,31,.12);color:var(--white);padding-left:2.5rem;}
+.mob a span{color:var(--red-m);font-size:1.2rem;}
+
+/* STRIPE */
+.stripe{height:3px;background:linear-gradient(90deg,var(--red-d),var(--red-m),var(--red-d));}
+
+/* SHARED SECTION */
+.wrap{max-width:1140px;margin:0 auto;padding:0 5rem;}
+.eyebrow{font-family:var(--sans);font-size:.62rem;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--red);font-weight:600;
+  margin-bottom:.9rem;display:block;}
+h1.page-title,h2.title{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,3rem);
+  font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.8rem;}
+h1.page-title em,h2.title em{color:var(--red);font-style:italic;}
+h2.title.light{color:var(--white);}
+.body-text{font-size:1.08rem;line-height:1.92;color:#000000;}
+.body-text p{margin-bottom:1.2rem;}
+.pull-quote{font-family:var(--serif);font-size:1.4rem;font-style:italic;
+  color:var(--red-d);border-left:3px solid var(--red);
+  padding:1rem 0 1rem 1.8rem;margin:2rem 0;line-height:1.5;}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{background:rgba(90, 15, 2, 0.97);padding:2.2rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(184,0,31,.3);}
+.foot-brand{font-family:var(--serif);color:var(--white);font-size:1.15rem;}
+.foot-brand em{color:var(--red-m);font-style:italic;font-weight:400;}
+.foot-sub{font-family:var(--body);font-style:italic;font-size:.88rem;
+  color:rgba(255, 255, 255, 0.81);margin-top:4px;}
+.foot-right{font-family:var(--sans);font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255, 255, 255, 0.823);text-align:right;line-height:1.9;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 1.5rem;}
+  .nav-links{display:none;}
+  .ham{display:flex;}
+  .mob{display:flex;}
+  .wrap{padding:0 1.6rem;}
+  footer{flex-direction:column;gap:1rem;padding:2rem 1.6rem;text-align:center;}
+  .foot-right{text-align:center;}
+}
+</style>
+
+<style>
+.page-hero{background:var(--cream);padding:5rem 0 4rem;border-bottom:3px solid var(--red);}
+.page-hero .eyebrow{color:var(--red-m);}
+h1.page-title{color:var(--dark);}
+.up-section{padding:5rem 0;background:var(--off);background: var(--cream);}
+.up-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;margin-top:2rem;}
+.up-aside{background:var(--red-d);padding:2.8rem;position:relative;overflow:hidden;}
+.up-aside::after{content:"✦";position:absolute;right:1.2rem;top:1rem;
+  font-size:6rem;color:var(--red);opacity:.1;line-height:1;}
+.up-aside h3{font-family:var(--serif);font-size:1.3rem;font-style:italic;
+  color:var(--cream);margin-bottom:.9rem;line-height:1.3;}
+.up-aside p{font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.6);}
+@media(max-width:900px){.up-grid{grid-template-columns:1fr;gap:2.5rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Mark <em>Carp</em></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="book.html">Books</a></li>
+<li><a href="bibliography.html">Bibliography</a></li>
+<li><a href="influences.html">Influences</a></li>
+<li><a href="upcoming.html" class="active">Upcoming</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+  <button class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob" id="mob"><a href="index.html">Home <span>›</span></a>
+<a href="about.html">About <span>›</span></a>
+<a href="book.html">Books <span>›</span></a>
+<a href="bibliography.html">Bibliography <span>›</span></a>
+<a href="influences.html">Influences <span>›</span></a>
+<a href="upcoming.html">Upcoming <span>›</span></a>
+<a href="gallery.html">Gallery <span>›</span></a>
+<a href="contact.html">Contact <span>›</span></a>
+</div>
+
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Next Project</span>
+    <h1 class="page-title">"The Few Who<br><em>Led the Many</em>"</h1>
+  </div>
+</div>
+<div class="stripe"></div>
+<section class="up-section">
+  <div class="wrap">
+    <div class="up-grid">
+      <div class="body-text rv">
+        <p>I'm currently working on a novel called "The Few Who Led the Many." This is a story of a husband-and-wife team who are among the earliest practitioners of the art of public relations. They do so by staging events, manipulating images, and creating themes — such as "Eating eggs are good for your health" — then getting the American Medical Association to endorse this recommendation.</p>
+        <p>Their employer would be The American Farm Bureau Federation. Typically, their other clientele includes politicians, major corporations, and government.</p>
+        <p>The story starts immediately before World War I and ends with the John F. Kennedy assassination — certainly an eventful period in American history.</p>
+      </div>
+      <div class="up-aside rv">
+        <h3>"The Few Who Led the Many"</h3>
+        <p>A husband-and-wife team pioneering the art of public relations — staging events, manipulating images, shaping public opinion — from the eve of World War I through the Kennedy assassination. A saga of power, persuasion, and the forces that shape history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div>
+    <div class="foot-brand">Mark <em>Carp</em></div>
+    <div class="foot-sub">Author · Commercial Real Estate Broker · Baltimore, MD</div>
+  </div>
+  <div class="foot-right">
+    B.S., University of Maryland<br>
+    M.S., The Johns Hopkins University<br>
+    Twenty Works of Fiction
+  </div>
+</footer>
+
+
+<script>
+const hamBtn=document.getElementById('ham');
+const mobEl=document.getElementById('mob');
+function closeMob(){hamBtn.classList.remove('open');mobEl.classList.remove('open');document.body.style.overflow='';}
+hamBtn.addEventListener('click',()=>{
+  const o=hamBtn.classList.toggle('open');
+  mobEl.classList.toggle('open',o);
+  document.body.style.overflow=o?'hidden':'';
+});
+mobEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMob));
+document.addEventListener('keydown',e=>e.key==='Escape'&&closeMob());
+// reveal
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const sibs=[...entry.target.parentElement.children].filter(c=>c.classList.contains('rv'));
+    const idx=sibs.indexOf(entry.target);
+    setTimeout(()=>entry.target.classList.add('on'),idx*90);
+    obs.unobserve(entry.target);
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

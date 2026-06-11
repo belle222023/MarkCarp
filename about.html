@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About — Mark Carp</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#B8001F;--red-d:#8A0015;--red-m:#C8002A;
+  --white:#FFFFFF;--off:#FAF8F5;--cream:#F4EFE6;
+  --dark:#130806;--dark2:#1E0C09;--ink:#2A1410;
+  --gray:#6B6560;--lgray:#DDD7CF;
+  --serif:"Playfair Display",Georgia,serif;
+  --body:"EB Garamond",Georgia,serif;
+  --sans:"Montserrat",sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--off);color:var(--ink);overflow-x:hidden;}
+nav{position:sticky;top:0;width:100%;z-index:1000;background:rgba(90,15,2,0.97);
+  backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,0,31,.35);
+  display:flex;align-items:center;justify-content:space-between;padding:0 5rem;height:68px;}
+.nav-logo{font-family:var(--serif);color:var(--white);font-size:1.8rem;font-weight:700;
+  text-decoration:none;letter-spacing:.03em;white-space:nowrap;}
+.nav-logo em{color:var(--red-m);font-style:italic;font-weight:400;}
+.nav-links{display:flex;gap:2.6rem;list-style:none;}
+.nav-links a{font-family:var(--sans);color:rgba(255,255,255,.6);text-decoration:none;
+  font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  transition:color .25s;position:relative;padding-bottom:3px;}
+.nav-links a::after{content:"";position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--red-m);transition:width .3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.ham{display:none;flex-direction:column;gap:5px;background:none;
+  border:1px solid rgba(255,255,255,.2);padding:10px;cursor:pointer;border-radius:2px;transition:.3s;}
+.ham span{display:block;width:20px;height:1.5px;background:var(--white);transition:.35s;}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--dark2);z-index:998;flex-direction:column;
+  transform:translateX(100%);transition:.4s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+.mob.open{transform:translateX(0);}
+.mob a{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--sans);color:rgba(255,255,255,.75);text-decoration:none;
+  font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:1.4rem 2rem;border-bottom:1px solid rgba(255,255,255,.05);transition:.25s;}
+.mob a:hover{background:rgba(184,0,31,.12);color:var(--white);padding-left:2.5rem;}
+.mob a span{color:var(--red-m);font-size:1.2rem;}
+.stripe{height:3px;background:linear-gradient(90deg,var(--red-d),var(--red-m),var(--red-d));}
+.wrap{max-width:1140px;margin:0 auto;padding:0 5rem;}
+.eyebrow{font-family:var(--sans);font-size:.62rem;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:.9rem;display:block;}
+h1.page-title,h2.title{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,3rem);
+  font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.8rem;}
+h1.page-title em,h2.title em{color:var(--red);font-style:italic;}
+.body-text{font-size:1.08rem;line-height:1.92;color:#3A2E2A;}
+.body-text p{margin-bottom:1.2rem;}
+.pull-quote{font-family:var(--serif);font-size:1.4rem;font-style:italic;
+  color:var(--red-d);border-left:3px solid var(--red);
+  padding:1rem 0 1rem 1.8rem;margin:2rem 0;line-height:1.5;}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+footer{background:rgba(90,15,2,0.97);padding:2.2rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(184,0,31,.3);}
+.foot-brand{font-family:var(--serif);color:var(--white);font-size:1.15rem;}
+.foot-brand em{color:var(--red-m);font-style:italic;font-weight:400;}
+.foot-sub{font-family:var(--body);font-style:italic;font-size:.88rem;color:rgba(255,255,255,0.784);margin-top:4px;}
+.foot-right{font-family:var(--sans);font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,0.868);text-align:right;line-height:1.9;}
+@media(max-width:900px){
+  nav{padding:0 1.5rem;}.nav-links{display:none;}.ham{display:flex;}.mob{display:flex;}
+  .wrap{padding:0 1.6rem;}
+  footer{flex-direction:column;gap:1rem;padding:2rem 1.6rem;text-align:center;}
+  .foot-right{text-align:center;}
+}
+</style>
+
+<style>
+/* PAGE HERO */
+.page-hero{background:var(--cream);padding:5rem 0 4rem;border-bottom:3px solid var(--red);}
+.page-hero .eyebrow{color:var(--red-m);}
+.page-hero-inner{display:flex;align-items:center;gap:5rem;}
+.page-hero-text{flex:1;}
+h1.page-title{color:var(--dark);}
+
+/* PORTRAIT */
+.portrait-wrap{flex-shrink:0;}
+.portrait-wrap img{
+  width:260px;height:310px;
+  object-fit:cover;object-position:center top;
+  display:block;
+  border:4px solid var(--white);
+  box-shadow:0 8px 40px rgba(0,0,0,.22), -7px 7px 0 var(--red);
+}
+.portrait-caption{
+  font-family:var(--sans);font-size:.55rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gray);text-align:center;margin-top:.75rem;
+}
+
+/* ABOUT */
+.about-section{padding:5rem 0;background:var(--cream);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.card-stack{display:flex;flex-direction:column;gap:1.2rem;}
+.card{display:flex;align-items:flex-start;gap:1.4rem;
+  padding:1.4rem 1.6rem;background:var(--off);border-left:3px solid var(--red);transition:.3s;}
+.card:hover{transform:translateX(5px);box-shadow:-5px 5px 18px rgba(184,0,31,.08);}
+.card-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+.card-label{font-family:var(--sans);font-size:.58rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--gray);font-weight:500;margin-bottom:4px;}
+.card-val{font-size:1rem;color:var(--ink);font-weight:500;}
+
+/* PHILOSOPHY */
+.philosophy{padding:5rem 0;background:var(--cream);}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2.5rem;}
+.phil-card{background:var(--cream);padding:2.6rem 2.4rem;position:relative;overflow:hidden;transition:.3s;}
+.phil-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:var(--red);transform:scaleX(0);transform-origin:left;transition:.4s;}
+.phil-card:hover{transform:translateY(-3px);}
+.phil-card:hover::before{transform:scaleX(1);}
+.phil-n{font-family:var(--serif);font-size:5rem;font-weight:900;color:var(--red);
+  opacity:.07;position:absolute;top:.4rem;right:1.4rem;line-height:1;pointer-events:none;}
+.phil-card h3{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:.8rem;}
+.phil-card p{font-size:.98rem;line-height:1.85;color:#555;}
+
+/* PERSONAL */
+.personal{padding:5rem 0;background:var(--cream);}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.5rem;}
+.p-card{background:var(--off);padding:2rem;border-bottom:3px solid transparent;transition:.3s;}
+.p-card:hover{border-color:var(--red);transform:translateY(-3px);}
+.p-icon{font-size:1.7rem;margin-bottom:1rem;}
+.p-label{font-family:var(--sans);font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:.6rem;}
+.p-text{font-size:.93rem;line-height:1.75;color:#555;}
+
+/* CLOSING */
+.closing-strip{background:var(--red);padding:4rem 0;text-align:center;}
+.closing-q{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-style:italic;
+  font-weight:400;line-height:1.2;color:var(--white);max-width:600px;margin:0 auto 1rem;
+  text-shadow:0 2px 18px rgba(0,0,0,.2);}
+.closing-attr{font-family:var(--sans);font-size:.62rem;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);}
+
+@media(max-width:900px){
+  .page-hero-inner{flex-direction:column-reverse;gap:2rem;align-items:flex-start;}
+  .portrait-wrap img{width:200px;height:240px;}
+  .about-grid,.phil-grid{grid-template-columns:1fr;gap:2rem;}
+  .p-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){.p-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Mark <em>Carp</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="book.html">Books</a></li>
+    <li><a href="bibliography.html">Bibliography</a></li>
+    <li><a href="influences.html">Influences</a></li>
+    <li><a href="upcoming.html">Upcoming</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob" id="mob">
+  <a href="index.html">Home <span>›</span></a>
+  <a href="about.html">About <span>›</span></a>
+  <a href="book.html">Books <span>›</span></a>
+  <a href="bibliography.html">Bibliography <span>›</span></a>
+  <a href="influences.html">Influences <span>›</span></a>
+  <a href="upcoming.html">Upcoming <span>›</span></a>
+  <a href="contact.html">Contact <span>›</span></a>
+</div>
+
+<!-- PAGE HERO with portrait -->
+<div class="page-hero">
+  <div class="wrap">
+    <div class="page-hero-inner">
+      <div class="page-hero-text rv">
+        <span class="eyebrow">Who I Am</span>
+        <h1 class="page-title">Author. Broker.<br><em>Storyteller.</em></h1>
+      </div>
+      <div class="portrait-wrap rv">
+        <img src="mark1.JPEG" alt="Mark Carp — Author & Broker, Baltimore, Maryland">
+        <p class="portrait-caption">Mark Carp &nbsp;·&nbsp; Baltimore, Maryland</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="stripe"></div>
+
+<section class="about-section">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="rv body-text">
+        <p>I'm a father of a 50-year-old son. I have a commercial and industrial real estate brokerage business and have written twenty works of fiction including novels, novellas, short stories and screenplays. I live in Baltimore, Maryland, and hold a B.S. degree from the University of Maryland and an M.S. degree from The Johns Hopkins University.</p>
+        <p>I enjoy the creative aspects of writing fiction, and I try to create realistic characters with flaws and good points that readers can identify with. Also, I enjoy creating plots which keep readers entrenched in the read. I've been reviewed locally and nationally, sometimes with critical acclaim. I'm currently working on my next book.</p>
+        <div class="pull-quote">"I am my books and my books are me."</div>
+        <p>I have a particular view of the world, and I seldom deviate in my beliefs. I despise political correctness. I admire people with keen intellects and I can't stand phonies. If you talk to me for ten minutes, you'll know ninety percent of what you need to know.</p>
+      </div>
+      <div class="rv card-stack">
+        <div class="card"><div class="card-icon">📚</div><div><div class="card-label">Works of Fiction</div><div class="card-val">Twenty total — novels, novellas, short stories &amp; screenplays</div></div></div>
+        <div class="card"><div class="card-icon">🏙️</div><div><div class="card-label">Professional Career</div><div class="card-val">Commercial &amp; Industrial Real Estate Brokerage, Baltimore</div></div></div>
+        <div class="card"><div class="card-icon">🎓</div><div><div class="card-label">Education</div><div class="card-val">B.S., University of Maryland · M.S., Johns Hopkins University</div></div></div>
+        <div class="card"><div class="card-icon">✍️</div><div><div class="card-label">Currently Writing</div><div class="card-val">"The Few Who Led the Many" — in progress</div></div></div>
+        <div class="card"><div class="card-icon">👨‍👦</div><div><div class="card-label">Family</div><div class="card-val">Father of a 50-year-old son; has a significant other in his life</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="stripe"></div>
+
+<section class="philosophy">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Writing Philosophy</span>
+      <h2 class="title">What Drives<br><em>the Work</em></h2>
+    </div>
+    <div class="phil-grid">
+      <div class="phil-card rv"><div class="phil-n">01</div><h3>Why I Write</h3><p>I write to tell compelling stories the reader can identify with as to plots and characters. My work reflects my views and I don't hold back. I believe in moving the plot along and use dialogue as a means to do so. My inspiration to write comes from a love of doing so.</p></div>
+      <div class="phil-card rv"><div class="phil-n">02</div><h3>Characters &amp; Truth</h3><p>The characters in my books often run the gamut from integrity to perfidy. None of my characters is perfect. People can interpret my works any way they wish. I don't try in my works to save the world. I feel my fiction has more than a ring of truthfulness.</p></div>
+      <div class="phil-card rv"><div class="phil-n">03</div><h3>Life as a Blueprint</h3><p>I've learned in life there is no substitute for effort, and you never say never. If you get knocked down, you better get up, or else you can get trampled. Life can change in a heartbeat and tomorrow is another day. In the end, one must learn to accept the good with the bad and go on.</p></div>
+      <div class="phil-card rv"><div class="phil-n">04</div><h3>Engaging Readers</h3><p>The writer has keen insights. He knows human nature. He's an exceptional storyteller who doesn't waste words. His prose is lean and absorbing. He really gets it. I transmit my beliefs into my plots and characters so my readers can identify with the story — I want them to say: "The author got it right. He really nailed it."</p></div>
+    </div>
+  </div>
+</section>
+<div class="stripe"></div>
+
+<section class="personal">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Beyond the Page</span>
+      <h2 class="title">Life in <em>Baltimore</em></h2>
+    </div>
+    <div class="p-grid">
+      <div class="p-card rv"><div class="p-icon">🏛️</div><div class="p-label">Civic &amp; Community</div><div class="p-text">Member of the Board of Trustees of B'nai Israel Synagogue and on the Board of Directors of the 7 Slade Condominium, where he serves as Treasurer.</div></div>
+      <div class="p-card rv"><div class="p-icon">🏈</div><div class="p-label">University of Maryland</div><div class="p-text">Member of the University of Maryland Alumni Association and the Terrapin Club. Season ticket holder to Maryland football games and attends basketball games.</div></div>
+      <div class="p-card rv"><div class="p-icon">🎓</div><div class="p-label">Johns Hopkins Alumni</div><div class="p-text">Active member of The Johns Hopkins University Alumni Association, maintaining ties to both alma maters.</div></div>
+      <div class="p-card rv"><div class="p-icon">🎨</div><div class="p-label">Arts &amp; Culture</div><div class="p-text">Enjoys frequenting the Baltimore Museum of Art and the Baltimore Symphony Orchestra.</div></div>
+      <div class="p-card rv"><div class="p-icon">🏊</div><div class="p-label">Active Living</div><div class="p-text">An avid swimmer in the summer months, maintaining an active lifestyle alongside his writing and business pursuits.</div></div>
+      <div class="p-card rv"><div class="p-icon">👨‍👦</div><div class="p-label">Family &amp; Personal Life</div><div class="p-text">Maintains a warm relationship with his son and has a significant other in his life — balancing family, writing, business, and community engagement.</div></div>
+    </div>
+  </div>
+</section>
+<div class="stripe"></div>
+
+<div class="closing-strip">
+  <div class="wrap">
+    <div class="closing-q rv">"I'm having a helluva time!"</div>
+    <p class="closing-attr rv">— Mark Carp · Author · Baltimore, Maryland</p>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="foot-brand">Mark <em>Carp</em></div>
+    <div class="foot-sub">Author · Commercial Real Estate Broker · Baltimore, MD</div>
+  </div>
+  <div class="foot-right">
+    B.S., University of Maryland<br>
+    M.S., The Johns Hopkins University<br>
+    Twenty Works of Fiction
+  </div>
+</footer>
+
+<script>
+const hamBtn=document.getElementById('ham');
+const mobEl=document.getElementById('mob');
+function closeMob(){hamBtn.classList.remove('open');mobEl.classList.remove('open');document.body.style.overflow='';}
+hamBtn.addEventListener('click',()=>{
+  const o=hamBtn.classList.toggle('open');
+  mobEl.classList.toggle('open',o);
+  document.body.style.overflow=o?'hidden':'';
+});
+mobEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMob));
+document.addEventListener('keydown',e=>e.key==='Escape'&&closeMob());
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const sibs=[...entry.target.parentElement.children].filter(c=>c.classList.contains('rv'));
+    const idx=sibs.indexOf(entry.target);
+    setTimeout(()=>entry.target.classList.add('on'),idx*90);
+    obs.unobserve(entry.target);
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
